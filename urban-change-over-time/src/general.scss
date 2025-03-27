@@ -1,0 +1,112 @@
+@import "@arcgis/core/assets/esri/themes/light/main.css";
+
+arcgis-scene {
+  height: 100%;
+}
+
+calcite-navigation-logo {
+  cursor: pointer;
+}
+
+#screen {
+  padding-bottom: 16px;
+}
+
+.hide {
+  display: none;
+}
+
+/* Startup dialog */
+
+calcite-label[slot="footer-end"] {
+  --calcite-label-margin-bottom: 0;
+}
+
+.startup-dialog-content {
+  max-height: 60vh;
+  img,
+  video {
+    max-width: 100%;
+  }
+}
+
+/* Time slider */
+
+.Time-loader {
+  padding-top: 0px;
+  padding-bottom: 20px;
+}
+
+.year-ticks {
+  display: none;
+}
+
+.year-labels {
+  margin-top: 5px !important;
+}
+
+/* Sticky note */
+
+#stickyNote {
+  position: absolute;
+  left: 40px;
+  bottom: 160px;
+  gap: 1rem;
+  font-family: monospace;
+  font-weight: 400;
+  font-style: normal;
+  background: #ffc;
+  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+  transform: rotate(-2deg);
+  padding: 0 1rem;
+  font-size: 1rem;
+}
+
+.sticky-note p {
+  margin: 0;
+  margin-top: 0.1rem;
+}
+
+/* Code Snippet */
+
+:root {
+  --code-height: 500px;
+  --code-width: 750px;
+  --code-width-close: -750px;
+}
+
+.code-snippet {
+  font-size: 1.1em;
+  position: absolute;
+  z-index: 999;
+  left: 0;
+  bottom: 0;
+  padding: 0;
+  margin: 0;
+  width: var(--code-width);
+  margin-left: var(--code-width-close);
+  margin-bottom: 140px;
+}
+
+// pre[class*="language-"] {
+//   margin-bottom: 140px;
+// }
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  // color: #9a6e3a;
+
+  background: none !important;
+}
+
+* {
+  --calcite-ui-brand: rgb(70, 70, 248);
+  // --calcite-ui-brand: rgb(55, 200, 100);
+  --calcite-ui-brand-hover: rgb(34, 34, 247);
+  // --calcite-ui-brand-press: rgb(0, 100, 0);
+
+  --calcite-ui-danger: rgb(248, 70, 70);
+}
