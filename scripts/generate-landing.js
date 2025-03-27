@@ -25,7 +25,6 @@ const html = `
   <title>📘 Project Overview</title>
   <style>
     body {
-      font-family: sans-serif;
       max-width: 800px;
       margin: auto;
       padding: 2rem;
@@ -44,14 +43,8 @@ const html = `
       padding: 0.2rem 0.4rem;
       border-radius: 4px;
     }
-    a {
-      color: #0366d6;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
   </style>
+  <script type="module" src="https://js.arcgis.com/calcite-components/3.0.3/calcite.esm.js"></script>
 </head>
 <body>
   ${htmlContent}

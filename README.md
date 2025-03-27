@@ -8,10 +8,10 @@ This repository contains a number of demos showcasing 3D capabilities using the 
 
 This app demonstrates how you can use 3D object layers to visualize and apply changes in a system of record.
 
-- Run app: [https://esri.github.io/3dgis/urban-change-over-time](https://esri.github.io/3dgis/urban-change-over-time)
-- Read more: [https://github.com/esri/3dgis/demos/UC2024/urbab-change-over-time](https://github.com/esri/3dgis/demos/UC2024/urbab-change-over-time)
+- Run app: [https://esri.github.io/3dgis-demos/urban-change-over-time](https://esri.github.io/3dgis-demos/urban-change-over-time)
+- Read more: [https://github.com/esri/3dgis-demos/demos/urban-change-over-time](https://github.com/esri/3dgis-demos/demos/urban-change-over-time)
 
-[![Download 3D Buildings and Terrain](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/02-download-3d-data.png)](https://esri.github.io/3dgis/urban-change-over-time)
+[![Download 3D Buildings and Terrain](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/02-download-3d-data.png)](https://github.com/esri/3dgis-demos/demos/urban-change-over-time)
 
 ## Prerequisites
 

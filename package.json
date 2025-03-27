@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build-all": "npm run build --workspaces",
+    "generate-landing": "node scripts/generate-landing.js",
     "dev:urban-change-over-time": "npm run dev --workspace=urban-change-over-time"
   },
   "dependencies": {
