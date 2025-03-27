@@ -1,37 +1,63 @@
 // scripts/generate-landing.js
 const fs = require("fs");
 const path = require("path");
+const MarkdownIt = require("markdown-it");
 
+const md = new MarkdownIt();
+const readmePath = path.resolve(__dirname, "../README.md");
 const distDir = path.resolve(__dirname, "../dist");
-const appsDir = path.resolve(distDir);
-const apps = fs.readdirSync(appsDir).filter((file) => {
-  const appPath = path.join(appsDir, file);
-  return fs.statSync(appPath).isDirectory() && file !== "assets";
-});
 
+// Ensure dist exists
+if (!fs.existsSync(distDir)) {
+  fs.mkdirSync(distDir, { recursive: true });
+}
+
+// Read and convert README.md
+const markdown = fs.readFileSync(readmePath, "utf-8");
+const htmlContent = md.render(markdown);
+
+// Build the final HTML page
 const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>App Launcher</title>
+  <title>📘 Project Overview</title>
   <style>
-    body { font-family: sans-serif; padding: 2rem; }
-    h1 { font-size: 2rem; }
-    ul { list-style-type: none; padding-left: 0; }
-    li { margin: 0.5rem 0; }
-    a { text-decoration: none; color: #0366d6; }
-    a:hover { text-decoration: underline; }
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: auto;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      margin-top: 2rem;
+    }
+    pre {
+      background: #f6f8fa;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    code {
+      background: #f0f0f0;
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-  <h1>Available Apps</h1>
-  <ul>
-    ${apps.map((app) => `<li><a href="${app}/">${app}</a></li>`).join("\n")}
-  </ul>
+  ${htmlContent}
 </body>
 </html>
 `;
 
 fs.writeFileSync(path.join(distDir, "index.html"), html);
-console.log("✅ Landing page generated!");
+console.log("✅ Generated landing page from README.md");
