@@ -8,10 +8,9 @@ This repository contains a number of demos showcasing 3D capabilities using the 
 
 This app demonstrates how you can use 3D object layers to visualize and apply changes in a system of record.
 
-- [View it live](https://esri.github.io/3dgis-demos/urban-change-over-time)
-- [Read more](./demos/urban-change-over-time)
+**[View it live](https://esri.github.io/3dgis-demos/urban-change-over-time)**
 
-[![Download 3D Buildings and Terrain](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/02-download-3d-data.png)](https://github.com/esri/3dgis-demos/demos/urban-change-over-time)
+[![Download 3D Buildings and Terrain](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/02-download-3d-data.png)](https://esri.github.io/3dgis-demos/urban-change-over-time)
 
 ## Prerequisites
 
@@ -48,9 +47,9 @@ The `dist` folder then contains all the files for the web app which can be copie
 
 ## Deployment
 
-The project uses a [GitHub Action](https://github.com/features/actions) script (see [`publish.yml`](.github/workflows/publish-all.yml)) to build and publish all apps to [GitHub Pages](https://pages.github.com/).
+The project uses a [GitHub Action](https://github.com/features/actions) script (see [`publish.yml`](./.github/workflows/publish-all.yml)) to build and publish all apps to [GitHub Pages](https://pages.github.com/).
 
-Alternatively [`publish-changed.yml`](.github/workflows/publish-all.yml) is run after pushing to the main branch, only building and deploying apps that have changed.
+Alternatively [`publish-changed.yml`](./.github/workflows/publish-all.yml) is run after pushing to the main branch, only building and deploying apps that have changed.
 
 ## Licensing
 
