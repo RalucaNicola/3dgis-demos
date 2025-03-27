@@ -79,5 +79,7 @@ const html = `
 </html>
 `;
 
-fs.writeFileSync(path.join(distDir, "index.html"), html);
-console.log("✅ Generated landing page from README.md");
+const htmlPath = path.join(distDir, "index.html");
+
+fs.writeFileSync(htmlPath, html);
+console.log("✅ Generated landing page from README.md", readmePath, htmlPath);
