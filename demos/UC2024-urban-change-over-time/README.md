@@ -2,7 +2,7 @@ This app demonstrates how you can use 3D object layers to make a system of recor
 
 ## Featured capabilities
 
-- Filter buildings by time
+- Filter buildings and layers by time
 - Download buildings and terrain as glTF
 - Upload a new proposed building design
 - Perform a client-side viewshed analysis on the new building
