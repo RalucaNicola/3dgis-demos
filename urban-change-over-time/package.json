@@ -3,11 +3,6 @@
   "version": "1.0.0",
   "description": "UC2024 Developer Day Demo",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/arnofiva/arcgis-core-template"
-  },
-  "author": "Arno Fiva",
   "scripts": {
     "start": "vite",
     "dev": "vite",
