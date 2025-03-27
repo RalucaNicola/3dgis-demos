@@ -42,11 +42,11 @@ jobs:
       - name: Generate landing page
         run: node scripts/generate-landing.js
 
-      - name: Save dist/ to cache (for future builds)
-        uses: actions/cache@v4
-        with:
-          path: dist
-          key: dist-cache
+      # - name: Save dist/ to cache (for future builds)
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: dist
+      #     key: dist-cache
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
