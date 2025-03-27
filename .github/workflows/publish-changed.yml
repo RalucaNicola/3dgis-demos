@@ -1,11 +1,9 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Build and deploy custom app
+name: Build & Deploy Changed Apps
 
 on:
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  push:
+    branches: [main]
 
-# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -14,16 +12,16 @@ permissions:
 # Allow one concurrent deployment
 concurrency:
   group: "pages"
-  cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # ensures full git history is available for diff
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -34,8 +32,26 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build
+      - name: Restore previously built dist (if cache exists)
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: dist-cache
+
+      - name: Detect changed apps
+        id: changes
+        run: |
+          changed_apps=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^apps/' | cut -d/ -f2 | sort -u | paste -sd ',' -)
+          echo "Changed apps: $changed_apps"
+          echo "changed=$changed_apps" >> $GITHUB_OUTPUT
+
+      - name: Build changed apps
+        if: steps.changes.outputs.changed != ''
+        run: |
+          for app in $(echo "${{ steps.changes.outputs.changed }}" | tr ',' '\n'); do
+            echo "🔨 Building $app..."
+            npm run build --workspace=$app
+          done
 
       - name: Generate landing page
         run: node scripts/generate-landing.js

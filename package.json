@@ -10,7 +10,8 @@
     "demos/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces"
+    "build-all": "npm run build --workspaces",
+    "dev:urban-change-over-time": "npm run dev --workspace=urban-change-over-time"
   },
   "dependencies": {
     "@arcgis/core": "^4.32",
