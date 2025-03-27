@@ -7,7 +7,7 @@
     "url": "https://github.com/esri/3dgis"
   },
   "workspaces": [
-    "apps/*"
+    "urban-change-over-time"
   ],
   "dependencies": {
     "@arcgis/core": "^4.32",
