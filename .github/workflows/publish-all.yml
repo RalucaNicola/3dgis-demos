@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Build and deploy custom app
+name: Build and deploy all apps
 
 on:
   # Allows you to run this workflow manually from the Actions tab
@@ -17,9 +17,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout
@@ -35,7 +37,7 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build
+        run: npm run build-all
 
       - name: Generate landing page
         run: node scripts/generate-landing.js
@@ -54,14 +56,6 @@ jobs:
         with:
           path: dist
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
