@@ -44,7 +44,7 @@ jobs:
       - name: Detect changed apps
         id: changes
         run: |
-          changed_apps=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^apps/' | cut -d/ -f2 | sort -u | paste -sd ',' -)
+          changed_apps=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^demos/' | cut -d/ -f2 | sort -u | paste -sd ',' -)
           echo "Changed apps: $changed_apps"
           echo "changed=$changed_apps" >> $GITHUB_OUTPUT
 
