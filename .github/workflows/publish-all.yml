@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Build and deploy all apps
+name: Build & Deploy All Apps
 
 on:
   # Allows you to run this workflow manually from the Actions tab
