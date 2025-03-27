@@ -8,6 +8,7 @@ export default defineConfig({
   base: "./",
   build: {
     target: "es2020",
+    outDir: "../../dist/urban-change-over-time",
   },
   plugins: [
     mdToHtmlPlugin({

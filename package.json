@@ -7,8 +7,11 @@
     "url": "https://github.com/esri/3dgis"
   },
   "workspaces": [
-    "urban-change-over-time"
+    "demos/*"
   ],
+  "scripts": {
+    "build": "npm run build --workspaces"
+  },
   "dependencies": {
     "@arcgis/core": "^4.32",
     "@arcgis/map-components": "^4.32",
