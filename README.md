@@ -1,41 +1,56 @@
-# UC2024: Urban change over time
+# Collection of 3D GIS demos
+
+This repository contains a number of demos showcasing 3D capabilities using the [ArcGIS Maps SDK for JavaScript](https://developers.arcgis.com/javascript/).
+
+## Demos
+
+### Urban change over time
 
 This app demonstrates how you can use 3D object layers to visualize and apply changes in a system of record.
 
-![Download 3D Buildings and Terrain](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/02-download-3d-data.png)
+- Run app: [https://esri.github.io/3dgis/urban-change-over-time](https://esri.github.io/3dgis/urban-change-over-time)
+- Read more: [https://github.com/esri/3dgis/demos/UC2024/urbab-change-over-time](https://github.com/esri/3dgis/demos/UC2024/urbab-change-over-time)
 
-See the [description](./DESCRIPTION.md) for more info on this demo app.
+[![Download 3D Buildings and Terrain](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/02-download-3d-data.png)](https://esri.github.io/3dgis/urban-change-over-time)
 
 ## Prerequisites
 
-- Node.js 16.0+
+- Node.js 18.0+
 
 The template comes set up with Prettier for formatting. Take a look at their [editor integration docs](https://prettier.io/docs/en/editors) to integrate it into your development environment.
 
-## Run project locally
+## Run projects locally
 
-To start:
+To start, run for example:
 
 ```
 npm install
-npm run dev
+npm run dev:urban-change-over-time
 ```
 
 Then open your browser at http://localhost:3000/
 
 ## Create productive build
 
+To build all apps in the repository, use:
+
 ```
-npm run build
+npm run build-all
 ```
 
-The `dist` folder then contains all the files for the web app which can either be copied to a web server or pushed to the `gh-pages` branch to be served at `https://arnofiva.github.io/arcgis-core-template`.
+Alternatively, you can build individual apps using:
 
-In order to use the `gh-pages` approach, see the following instructions. Make sure you remove an existing `dist` folder if it has been created from a previous build.
+```
+npm run build --workspace=urban-change-over-time
+```
+
+The `dist` folder then contains all the files for the web app which can be copied to a web server.
 
 ## Deployment
 
-The project uses a [GitHub Action](https://github.com/features/actions) script (see [`publish.yml`](.github/workflows/publish.yml)) to build and publish the app to [GitHub Pages](https://pages.github.com/).
+The project uses a [GitHub Action](https://github.com/features/actions) script (see [`publish.yml`](.github/workflows/publish-all.yml)) to build and publish all apps to [GitHub Pages](https://pages.github.com/).
+
+Alternatively [`publish-changed.yml`](.github/workflows/publish-all.yml) is run after pushing to the main branch, only building and deploying apps that have changed.
 
 ## Licensing
 

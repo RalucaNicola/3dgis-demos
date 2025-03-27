@@ -6,7 +6,7 @@ import "@esri/calcite-components/dist/components/calcite-dialog";
 import "@esri/calcite-components/dist/components/calcite-label";
 import AppStore from "../stores/AppStore";
 
-import splash from "../../DESCRIPTION.md";
+import splash from "../../README.md";
 
 const Loader = ({ store }: { store: AppStore }) => {
   switch (store.loading) {

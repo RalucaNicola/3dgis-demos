@@ -1,54 +1,44 @@
-# UC2024: Urban change over time
+This app demonstrates how you can use 3D object layers to make a system of record accessible through the web.
 
-This app demonstrates how you can use 3D object layers to visualize and apply changes in a system of record.
+## Featured capabilities
+
+- Filter buildings by time
+- Download buildings and terrain as glTF
+- Upload a new proposed building design
+- Perform a client-side viewshed analysis on the new building
+
+## Resources
+
+- Recording of the demo: [UC2024 - Urban change over time.mp4](https://esriis-my.sharepoint.com/:v:/g/personal/arno9993_esri_com/Ec3BCTicweJIqinwY6XfcFABuDE1JKPbVj5aqvVEWxFy-g)
+- 3D assets used in demo
+  - Blender project: [development-site.blend](https://arnofiva.github.io/UC2024-developer-day/building-proposal-v1.glb)
+  - Upladed building proposal: [building-proposal-v1.glb](https://arnofiva.github.io/UC2024-developer-day/building-proposal-v1.glb)
+- Source code is available on GitHub: [https://github.com/arnofiva/UC2024-developer-day/](https://github.com/arnofiva/UC2024-developer-day/)
+
+## Steps
+
+Web scenes and 3D layer types now support time, helping us to look at the past and future. Let’s bring in a time slider and start in the year 1200, where we see that one of the churches is the oldest building still present in Zurich
+
+![Time Enablement](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/01-time-enablement.png)
+
+Moving forward in time we see individual buildings coming in, until the present when we will also bring in the latest tree dataset. This scene layer also contains planned development visualized by massing volumes, allowing us to see how the city will change in the next few years.
+
+Let’s zoom into one of these plans and assume we are an architect that wants to design the new building. Scene layer editing is now fully supported in the web, allowing us to upload, but also download 3D models. This allows an architect to bring the surroundings around the planned development into our 3D modeling software of choice.
 
 ![Download 3D Buildings and Terrain](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/02-download-3d-data.png)
 
-See the [description](./DESCRIPTION.md) for more info on this demo app.
+We can now import the exported glTF in our modeling software and use the terrain and contextual buildings to create a new design proposal. Using the editor we can upload it back into the ArcGIS system and place the building at the correct location using tooltips. Several formats besides glTF are supported, such as OBJ, FBX, Collada and IFC and get converted on the server side to I3S for efficient streaming.
 
-## Prerequisites
+![Upload Building](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/03-upload-building.png)
 
-- Node.js 16.0+
+Once the building is persisted, the footprint of the new building is queried to filter existing buildings in our scene layer or flatten an integrated mesh layer to visualize it in a realistic context.
 
-The template comes set up with Prettier for formatting. Take a look at their [editor integration docs](https://prettier.io/docs/en/editors) to integrate it into your development environment.
+![Realistic Visualization](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/04-realistic-visualization.png)
 
-## Run project locally
+The building in front used to be a local brewery that got transformed into a public bath with a rooftop pool, one of Zurich’s highlights for locals and visitors.
 
-To start:
+Using a client-side viewshed analysis, I can now for example see what parts of my new building can be seen from this public rooftop location.
 
-```
-npm install
-npm run dev
-```
+![Viewshed Analysis](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/05-analysis.png)
 
-Then open your browser at http://localhost:3000/
-
-## Create productive build
-
-```
-npm run build
-```
-
-The `dist` folder then contains all the files for the web app which can either be copied to a web server or pushed to the `gh-pages` branch to be served at `https://arnofiva.github.io/arcgis-core-template`.
-
-In order to use the `gh-pages` approach, see the following instructions. Make sure you remove an existing `dist` folder if it has been created from a previous build.
-
-## Deployment
-
-The project uses a [GitHub Action](https://github.com/features/actions) script (see [`publish.yml`](.github/workflows/publish.yml)) to build and publish the app to [GitHub Pages](https://pages.github.com/).
-
-## Licensing
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-A copy of the license is available in the repository's [license.txt](./license.txt) file.
+This demo showed how to visualize, upload and analyze change using a 3D Object Layer.
