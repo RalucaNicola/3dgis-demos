@@ -47,7 +47,7 @@ The `dist` folder then contains all the files for the web app which can be copie
 
 ## Deployment
 
-The project uses a [GitHub Action](https://github.com/features/actions) script (see [`publish.yml`](./.github/workflows/publish-all.yml)) to build and publish all apps to [GitHub Pages](https://pages.github.com/).
+The project uses a [GitHub Action](https://github.com/features/actions) script (see [`publish-all.yml`](./.github/workflows/publish-all.yml)) to build and publish all apps to [GitHub Pages](https://pages.github.com/).
 
 Alternatively [`publish-changed.yml`](./.github/workflows/publish-all.yml) is run after pushing to the main branch, only building and deploying apps that have changed.
 
