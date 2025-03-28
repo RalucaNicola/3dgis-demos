@@ -45,7 +45,7 @@ jobs:
           restore-keys: |
             dist-
 
-      - name: Detect changed apps and root
+      - name: Detect changed demos and root
         id: changes
         run: |
           ROOT_CHANGED=false
@@ -53,7 +53,7 @@ jobs:
           # Get list of all changed files between the two commits
           CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
 
-          # Look for anything outside the apps/ directory
+          # Look for anything outside the demos/ directory
           for file in $CHANGED_FILES; do
             if [[ ! "$file" =~ ^demos/ ]]; then
               ROOT_CHANGED=true
@@ -64,24 +64,24 @@ jobs:
           echo "Root changed: $ROOT_CHANGED"
 
           if $ROOT_CHANGED; then
-            # All apps should be built
-            apps=$(ls apps)
-            echo "All apps marked for build due to root-level changes."
+            # All demos should be built
+            demos=$(ls demos)
+            echo "All demos marked for build due to root-level changes."
           else
-            # Extract changed apps from paths under demos/
-            apps=$(echo "$CHANGED_FILES" | grep '^demos/' | cut -d/ -f2 | sort -u)
+            # Extract changed demos from paths under demos/
+            demos=$(echo "$CHANGED_FILES" | grep '^demos/' | cut -d/ -f2 | sort -u)
           fi
 
-          if [ -z "$apps" ]; then
+          if [ -z "$demos" ]; then
             echo "No app changes detected."
             echo "changed=" >> $GITHUB_OUTPUT
           else
-            changed=$(echo "$apps" | paste -sd ',' -)
-            echo "Changed apps: $changed"
+            changed=$(echo "$demos" | paste -sd ',' -)
+            echo "Changed demos: $changed"
             echo "changed=$changed" >> $GITHUB_OUTPUT
           fi
 
-      - name: Build changed apps
+      - name: Build changed demos
         if: steps.changes.outputs.changed != ''
         run: |
           for app in $(echo "${{ steps.changes.outputs.changed }}" | tr ',' '\n'); do
