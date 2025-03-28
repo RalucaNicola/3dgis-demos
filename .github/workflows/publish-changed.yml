@@ -45,12 +45,41 @@ jobs:
           restore-keys: |
             dist-
 
-      - name: Detect changed apps
+      - name: Detect changed apps and root
         id: changes
         run: |
-          changed_apps=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^demos/' | cut -d/ -f2 | sort -u | paste -sd ',' -)
-          echo "Changed apps: $changed_apps"
-          echo "changed=$changed_apps" >> $GITHUB_OUTPUT
+          ROOT_CHANGED=false
+
+          # Get list of all changed files between the two commits
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+
+          # Look for anything outside the apps/ directory
+          for file in $CHANGED_FILES; do
+            if [[ ! "$file" =~ ^demos/ ]]; then
+              ROOT_CHANGED=true
+              break
+            fi
+          done
+
+          echo "Root changed: $ROOT_CHANGED"
+
+          if $ROOT_CHANGED; then
+            # All apps should be built
+            apps=$(ls apps)
+            echo "All apps marked for build due to root-level changes."
+          else
+            # Extract changed apps from paths under demos/
+            apps=$(echo "$CHANGED_FILES" | grep '^demos/' | cut -d/ -f2 | sort -u)
+          fi
+
+          if [ -z "$apps" ]; then
+            echo "No app changes detected."
+            echo "changed=" >> $GITHUB_OUTPUT
+          else
+            changed=$(echo "$apps" | paste -sd ',' -)
+            echo "Changed apps: $changed"
+            echo "changed=$changed" >> $GITHUB_OUTPUT
+          fi
 
       - name: Build changed apps
         if: steps.changes.outputs.changed != ''
@@ -61,16 +90,20 @@ jobs:
           done
 
       - name: Generate landing page
+        if: steps.changes.outputs.changed != ''
         run: node scripts/generate-landing.js
 
       - name: Setup Pages
+        if: steps.changes.outputs.changed != ''
         uses: actions/configure-pages@v4
 
       - name: Upload artifact
+        if: steps.changes.outputs.changed != ''
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
       - name: Deploy to GitHub Pages
+        if: steps.changes.outputs.changed != ''
         id: deployment
         uses: actions/deploy-pages@v4
