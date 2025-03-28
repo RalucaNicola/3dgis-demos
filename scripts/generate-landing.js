@@ -49,7 +49,7 @@ const html = `
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>📘 Project Overview</title>
+  <title>3D GIS Demos</title>
   <style>
     body {
       max-width: 800px;

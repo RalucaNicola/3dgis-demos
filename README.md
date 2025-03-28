@@ -1,6 +1,6 @@
 # Collection of 3D GIS demos
 
-This repository contains a number of demos showcasing 3D capabilities using the [ArcGIS Maps SDK for JavaScript](https://developers.arcgis.com/javascript/).
+This repository contains the [3D GIS](https://3dgis.maps.arcgis.com/home/content.html?sortField=modified&sortOrder=desc&view=grid&contentType=all&focus=applications-web#org) demos. These are custom apps built with the [ArcGIS Maps SDK for JavaScript](https://developers.arcgis.com/javascript/).
 
 ## Demos
 
