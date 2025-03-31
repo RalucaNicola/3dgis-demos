@@ -12,7 +12,8 @@
   "scripts": {
     "build-all": "npm run build --workspaces",
     "generate-landing": "node scripts/generate-landing.js",
-    "dev:urban-change-over-time": "npm run dev --workspace=urban-change-over-time"
+    "dev:urban-change-over-time": "npm run dev --workspace=urban-change-over-time",
+    "dev:urban-tv": "npm run dev --workspace=urban-tv"
   },
   "dependencies": {
     "@arcgis/core": "^4.32",

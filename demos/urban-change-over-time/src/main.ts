@@ -8,10 +8,6 @@ console.log(`Using ArcGIS Maps SDK for JavaScript v${kernel.fullVersion}`);
 
 // setAssetPath("https://js.arcgis.com/calcite-components/1.0.0-beta.77/assets");
 
-/*
-47.36629893125558,8.525363607720573,417.9994201660156
-*/
-
 const params = new URLSearchParams(document.location.search.slice(1));
 
 const webSceneId = params.get("webscene") || "30bd624de45247dfa53320a8213729a4";
