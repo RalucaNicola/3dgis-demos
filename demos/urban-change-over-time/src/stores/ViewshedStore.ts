@@ -81,6 +81,11 @@ class ViewshedStore extends Accessor {
     this.abortController?.abort();
     this.abortController = null;
   }
+
+  destroy(): void {
+    this.stopCreating();
+    this.view.analyses.remove(this.viewshedAnalysis);
+  }
 }
 
 export default ViewshedStore;
