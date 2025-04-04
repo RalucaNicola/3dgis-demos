@@ -3,7 +3,7 @@
 This repository contains demos showcasing 3D GIS capabilities of ArcGIS. The custom apps are built with the [Maps SDK for JavaScript](https://developers.arcgis.com/javascript/) and [Calcite Design System](https://developers.arcgis.com/calcite-design-system/).
 
 - [3D GIS demo organization](https://3dgis.maps.arcgis.com/home/content.html?sortField=modified&sortOrder=desc&view=grid&contentType=all&focus=applications-web#org) on ArcGIS Online
-- [Source code](https://github.com/esri/3d-gis-demos) on GitHub
+- [Source code](https://github.com/esri/3dgis-demos) on GitHub
 
 ## Demos
 
