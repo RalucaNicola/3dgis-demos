@@ -1,6 +1,9 @@
 # Collection of 3D GIS demos
 
-This repository contains the [3D GIS](https://3dgis.maps.arcgis.com/home/content.html?sortField=modified&sortOrder=desc&view=grid&contentType=all&focus=applications-web#org) demos. These are custom apps built with the [ArcGIS Maps SDK for JavaScript](https://developers.arcgis.com/javascript/).
+This repository contains demos showcasing 3D GIS capabilities of ArcGIS. The custom apps are built with the [Maps SDK for JavaScript](https://developers.arcgis.com/javascript/) and [Calcite Design System](https://developers.arcgis.com/calcite-design-system/).
+
+- [3D GIS demo organization](https://3dgis.maps.arcgis.com/home/content.html?sortField=modified&sortOrder=desc&view=grid&contentType=all&focus=applications-web#org) on ArcGIS Online
+- [Source code](https://github.com/esri/3d-gis-demos) on GitHub
 
 ## Demos
 
@@ -10,7 +13,15 @@ This app demonstrates how you can use 3D object layers to visualize and apply ch
 
 **[View it live](https://esri.github.io/3dgis-demos/urban-change-over-time)**
 
-[![Download 3D Buildings and Terrain](https://www.arcgis.com/sharing/content/items/30bd624de45247dfa53320a8213729a4/resources/screenshots/02-download-3d-data.png)](https://esri.github.io/3dgis-demos/urban-change-over-time)
+[![Download 3D Buildings and Terrain](./demos/urban-change-over-time/public/thumbnail.png)](https://esri.github.io/3dgis-demos/urban-change-over-time)
+
+### Urban TV
+
+Place a billboard showing an image or video in your scene.
+
+**[View it live](https://esri.github.io/3dgis-demos/urban-tv)**
+
+[![Billboard with video](./demos/urban-tv/public/thumbnail.png)](https://esri.github.io/3dgis-demos/urban-tv)
 
 ## Prerequisites
 

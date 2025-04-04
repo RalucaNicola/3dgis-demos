@@ -34,12 +34,9 @@ md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
   if (hrefIndex >= 0) {
     const href = token.attrs[hrefIndex][1];
 
-    // Replace links that start with './docs/'
+    // Replace links that start with '.' and have a `/demos` or `/public` part
     if (href.startsWith("./")) {
-      token.attrs[hrefIndex][1] = href.replace(
-        "./",
-        "https://github.com/esri/3dgis-demos/blob/main/",
-      );
+      token.attrs[hrefIndex][1] = input.replace(/\/(demos|public)/g, "");
     }
   }
 
