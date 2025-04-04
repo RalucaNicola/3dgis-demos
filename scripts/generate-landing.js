@@ -27,6 +27,20 @@ const defaultRender =
     return self.renderToken(tokens, idx, options);
   };
 
+md.renderer.rules.image = (tokens, idx, options, env, self) => {
+  const token = tokens[idx];
+
+  // Modify the src attribute
+  const srcIndex = token.attrIndex("src");
+  if (srcIndex >= 0) {
+    const src = token.attrs[srcIndex][1];
+    // Replace /demos or /public from the image URL
+    token.attrs[srcIndex][1] = src.replace(/\/(demos|public)/g, "");
+  }
+
+  return defaultRender(tokens, idx, options, env, self);
+};
+
 md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
   const token = tokens[idx];
   const hrefIndex = token.attrIndex("href");
@@ -36,7 +50,7 @@ md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
 
     // Replace links that start with '.' and have a `/demos` or `/public` part
     if (href.startsWith("./")) {
-      token.attrs[hrefIndex][1] = input.replace(/\/(demos|public)/g, "");
+      token.attrs[hrefIndex][1] = href.replace(/\/(demos|public)/g, "");
     }
   }
 
