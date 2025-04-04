@@ -148,10 +148,15 @@ class AppStore extends Accessor {
       }),
     });
 
-    // Slightly rotate screen
+    const tilt = camera.tilt - 90;
+
+    // Slightly change the heading of the screen so we end up looking at it from the side
     mesh.rotate(0, 0, -15);
+    // Counter tilt the screen to account for the tilt of the camera we are adding below
+    mesh.rotate(-tilt, 0, 0);
+
     // Move screen away from camera
-    mesh.offset(0, 170, -10);
+    mesh.offset(0, 150, -5);
 
     // Define origin of screen to be camera position (again)
     mesh = await meshUtils.convertVertexSpace(
@@ -161,7 +166,8 @@ class AppStore extends Accessor {
       }),
     );
 
-    // Rotate screen in front of camera
+    // Rotate and tilt screen so it is in the view of the camera
+    mesh.rotate(tilt, 0, 0);
     mesh.rotate(0, 0, -camera.heading);
 
     if (mesh.components && 1 < mesh.components.length) {
