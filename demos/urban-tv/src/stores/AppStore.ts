@@ -30,7 +30,10 @@ import UserStore from "./UserStore";
 import MeshLocalVertexSpace from "@arcgis/core/geometry/support/MeshLocalVertexSpace";
 import * as meshUtils from "@arcgis/core/geometry/support/meshUtils";
 
-type AppStoreProperties = Pick<AppStore, "webSceneId" | "skipPreload">;
+type AppStoreProperties = Pick<
+  AppStore,
+  "webSceneId" | "skipPreload" | "videoUrl"
+>;
 
 @subclass()
 class AppStore extends Accessor {
@@ -59,6 +62,9 @@ class AppStore extends Accessor {
 
   @property({ constructOnly: true })
   userStore = new UserStore();
+
+  @property({ constructOnly: true })
+  videoUrl: string;
 
   @property()
   get loading() {
@@ -108,7 +114,7 @@ class AppStore extends Accessor {
 
   private async addTV() {
     const video = document.createElement("video");
-    video.src = "./Shot_02_1080.mp4";
+    video.src = this.videoUrl;
     video.autoplay = false;
     video.loop = false;
     video.muted = false;

@@ -13,8 +13,36 @@
  * limitations under the License.
  */
 
+import esriRequest from "@arcgis/core/request";
+
 export function timeout(timeoutInMilliseconds: number) {
   return new Promise<void>((resolve) => {
     setTimeout(resolve, timeoutInMilliseconds);
   });
+}
+
+const allowedVideoTypes = ["video/mp4", "video/webm", "video/ogg"];
+
+export async function isValidVideoUrl(videoUrl: string) {
+  if (videoUrl && videoUrl.startsWith("https://")) {
+    try {
+      const response = await esriRequest(videoUrl, {
+        method: "head",
+        responseType: "text",
+      });
+
+      if (!response.getHeader) {
+        return false;
+      }
+
+      const contentType = response.getHeader("content-type");
+
+      if (!contentType) {
+        return false;
+      }
+
+      return allowedVideoTypes.includes(contentType);
+    } catch {}
+  }
+  return false;
 }

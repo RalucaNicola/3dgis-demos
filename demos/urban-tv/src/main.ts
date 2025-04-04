@@ -18,10 +18,13 @@ import * as kernel from "@arcgis/core/kernel";
 import "@esri/calcite-components/dist/calcite/calcite.css";
 import App from "./compontents/App";
 import AppStore from "./stores/AppStore";
+import { isValidVideoUrl } from "./utils";
 
 console.log(`Using ArcGIS Maps SDK for JavaScript v${kernel.fullVersion}`);
 
 // setAssetPath("https://js.arcgis.com/calcite-components/1.0.0-beta.77/assets");
+
+const DEFAULT_VIDEO_URL = `./Shot_02_1080.mp4`;
 
 const params = new URLSearchParams(document.location.search.slice(1));
 
@@ -29,16 +32,25 @@ const webSceneId = params.get("webscene") || "5bc5aaa31c284830afd90ae51b38686e";
 
 const skipPreload = params.has("skipPreload");
 
-const store = new AppStore({
-  webSceneId,
-  skipPreload,
-});
+(async () => {
+  let videoUrl = params.get("video");
 
-new App({
-  container: "app",
-  store,
-});
+  if (!videoUrl || !(await isValidVideoUrl(videoUrl))) {
+    videoUrl = DEFAULT_VIDEO_URL;
+  }
 
-whenOnce(() => store.sceneStore.ready).then(() => {
-  (window as any)["view"] = store.sceneStore.view;
-});
+  const store = new AppStore({
+    webSceneId,
+    videoUrl,
+    skipPreload,
+  });
+
+  new App({
+    container: "app",
+    store,
+  });
+
+  whenOnce(() => store.sceneStore.ready).then(() => {
+    (window as any)["view"] = store.sceneStore.view;
+  });
+})();
