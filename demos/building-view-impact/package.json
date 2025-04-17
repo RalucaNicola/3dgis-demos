@@ -1,0 +1,15 @@
+{
+  "name": "building-view-impact",
+  "version": "1.0.0",
+  "description": "Visualization of how a newly proposed building can impact the current view",
+  "private": true,
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
+    "lint": "concurrently --group --prefix none \"npm:lint:*\"",
+    "lint:typecheck": "tsc --noEmit",
+    "lint:prettier": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,scss}'"
+  }
+}
