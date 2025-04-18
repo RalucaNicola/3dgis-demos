@@ -76,11 +76,9 @@ class ViewshedStore extends Accessor {
 
     updatePreview(previewElement: HTMLArcgisSceneElement) {
         const previewView = previewElement.view;
-        //previewView.camera = getCameraFromViewshed(programaticViewshed);
         previewView.environment = this.view.environment;
         previewView.ui.components = [];
 
-        // Have the preview's camera update dependent on the selected viewshed.
         reactiveUtils.when(
             () => {
                 const viewshed = this.analysisView?.selectedViewshed;
@@ -88,7 +86,7 @@ class ViewshedStore extends Accessor {
             },
             (camera) => {
                 previewView.camera = camera;
-            }
+            }, { initial: true }
         );
     }
 
