@@ -33,7 +33,8 @@ import "@arcgis/map-components/dist/components/arcgis-navigation-toggle";
 import "@arcgis/map-components/dist/components/arcgis-scene";
 import "@arcgis/map-components/dist/components/arcgis-zoom";
 import AppMenu from "./AppMenu";
-import NavigationBar from "./NavigationBar";
+import StartupDialog from "./StartupDialog";
+import User from "./User";
 
 type AppProperties = Pick<App, "store">;
 
@@ -52,18 +53,16 @@ class App extends Widget<AppProperties> {
     return (
       <div>
         <calcite-shell>
-          <NavigationBar store={this.store}></NavigationBar>
+          <StartupDialog store={this.store}></StartupDialog>
+          <User store={this.store}></User>
           <AppMenu store={this.store}></AppMenu>
           <arcgis-scene
             item-id={this.store.webSceneId}
             onArcgisViewReadyChange={(e: ArcgisSceneCustomEvent<void>) =>
               this.bindView(e.target)
             }
-          >
-            <arcgis-zoom position="top-right"></arcgis-zoom>
-            <arcgis-navigation-toggle position="top-right"></arcgis-navigation-toggle>
-            <arcgis-compass position="top-right"></arcgis-compass>
-          </arcgis-scene>
+            padding={{ top: 70 }}
+          ></arcgis-scene>
         </calcite-shell>
       </div>
     );

@@ -4,12 +4,31 @@ import AppStore from "../stores/AppStore";
 const Intro = ({ store }: { store: AppStore }) => {
   return (
     <div>
-      <h1>{store.title}</h1>
+      <div class="header">
+        <h1
+          onclick={() => {
+            const itemPageUrl = store.sceneStore.map.portalItem?.itemPageUrl;
+            if (itemPageUrl) {
+              window.open(itemPageUrl, "new");
+            }
+          }}
+        >
+          Building View Impact
+        </h1>
+        <calcite-button
+          appearance="transparent"
+          kind="neutral"
+          icon-start="information"
+          slot="content-start"
+          onclick={() => (store.isStartupDialogShown = true)}
+          round
+        ></calcite-button>
+      </div>
       <p>
-        New buildings can impact the views of places in a city. Use this
-        application to upload a building model and see how the viewpoint changes
-        using the interactive viewshed tool.
+        See how the view from your window changes when a new proposed
+        construction is built close by.
       </p>
+      <img src="./building-viewshed.png" class="intro-image"></img>
     </div>
   );
 };

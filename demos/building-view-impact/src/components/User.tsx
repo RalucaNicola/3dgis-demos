@@ -25,34 +25,13 @@ import "@esri/calcite-components/dist/components/calcite-navigation";
 import "@esri/calcite-components/dist/components/calcite-navigation-logo";
 import "@esri/calcite-components/dist/components/calcite-navigation-user";
 
-const NavigationBar = ({ store }: { store: AppStore }) => {
+const User = ({ store }: { store: AppStore }) => {
   const userStore = store.userStore;
 
   const user = (userStore.authenticated && userStore.user) || null;
 
   return (
-    <calcite-navigation slot="header">
-      <calcite-navigation-logo
-        slot="logo"
-        heading={store.title}
-        description="ArcGIS Maps SDK for JavaScript"
-        thumbnail="./icon-64.svg"
-        onclick={() => {
-          const itemPageUrl = store.sceneStore.map.portalItem?.itemPageUrl;
-          if (itemPageUrl) {
-            window.open(itemPageUrl, "new");
-          }
-        }}
-      ></calcite-navigation-logo>
-
-      <calcite-button
-        appearance="transparent"
-        kind="neutral"
-        icon-start="information"
-        slot="content-start"
-        onclick={() => (store.isStartupDialogShown = true)}
-      ></calcite-button>
-
+    <div class="user-menu">
       {user ? (
         <calcite-navigation-user
           slot="user"
@@ -71,8 +50,8 @@ const NavigationBar = ({ store }: { store: AppStore }) => {
           ></calcite-menu-item>
         </calcite-menu>
       )}
-    </calcite-navigation>
+    </div>
   );
 };
 
-export default NavigationBar;
+export default User;

@@ -5,7 +5,11 @@ import UploadStore from "../stores/UploadStore";
 
 const UploadScreen = ({ store }: { store: UploadStore }) => {
   return (
-    <div class="container">
+    <div>
+      <p>
+        <span class="step">1</span>Upload the model of the proposed
+        construction.
+      </p>
       <div
         id="drop-zone"
         ondragover={(event: DragEvent) => {
@@ -31,7 +35,6 @@ const UploadScreen = ({ store }: { store: UploadStore }) => {
         }}
       >
         <div>
-          <h1>Add your own model</h1>
           <label class="custom-file-upload">
             Browse for files
             <calcite-icon icon="folder" scale="s"></calcite-icon>
@@ -57,10 +60,10 @@ const UploadScreen = ({ store }: { store: UploadStore }) => {
           </label>
           <p>or drag a file here</p>
         </div>
+        {(store.isUploading || store.isUpdating) && (
+          <calcite-loader class="loader" scale="m"></calcite-loader>
+        )}
       </div>
-      {(store.isUploading || store.isUpdating) && (
-        <calcite-loader class="loader" scale="l"></calcite-loader>
-      )}
     </div>
   );
 };

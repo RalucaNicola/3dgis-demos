@@ -15,20 +15,25 @@
 
 @import "@arcgis/core/assets/esri/themes/light/main.css";
 
+:root {
+  --calcite-navigation-background-color: transparent;
+  --background-color: rgba(255, 255, 255, 0.5);
+  --border-radius: 10px;
+  --calcite-color-brand: rgb(232, 179, 100) !important;
+  --calcite-color-brand-hover: rgb(237, 164, 55) !important;
+  --calcite-color-brand-press: rgb(237, 164, 55) !important;
+}
+
 arcgis-scene {
   height: 100%;
 }
 
-calcite-navigation-logo {
-  cursor: pointer;
-}
-
-#screen {
-  padding-bottom: 16px;
-}
-
 .hide {
   display: none;
+}
+
+.display {
+  display: block;
 }
 
 /* Startup dialog */
@@ -45,107 +50,67 @@ calcite-label[slot="footer-end"] {
   }
 }
 
-/* Time slider */
+/* User log in */
 
-.Time-loader {
-  padding-top: 0px;
-  padding-bottom: 20px;
-}
-
-.year-ticks {
-  display: none;
-}
-
-.year-labels {
-  margin-top: 5px !important;
-}
-
-/* Sticky note */
-
-#stickyNote {
+.user-menu {
   position: absolute;
-  left: 40px;
-  bottom: 160px;
-  gap: 1rem;
-  font-family: monospace;
-  font-weight: 400;
-  font-style: normal;
-  background: #ffc;
-  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
-  transform: rotate(-2deg);
-  padding: 0 1rem;
-  font-size: 1rem;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  background: var(--background-color);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  padding: 10px 0;
 }
 
-.sticky-note p {
-  margin: 0;
-  margin-top: 0.1rem;
-}
-
-/* Code Snippet */
-
-:root {
-  --code-height: 500px;
-  --code-width: 750px;
-  --code-width-close: -750px;
-}
-
-.code-snippet {
-  font-size: 1.1em;
-  position: absolute;
-  z-index: 999;
-  left: 0;
-  bottom: 0;
-  padding: 0;
-  margin: 0;
-  width: var(--code-width);
-  margin-left: var(--code-width-close);
-  margin-bottom: 140px;
-}
-
-// pre[class*="language-"] {
-//   margin-bottom: 140px;
-// }
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  // color: #9a6e3a;
-
-  background: none !important;
-}
+/* Side menu */
 
 .card {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  bottom: 40px;
+  top: 10px;
+  left: 10px;
+  bottom: 30px;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--background-color);
   backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  width: 400px;
+  padding: 1.5rem;
+  overflow: auto;
+}
+
+.card p {
+  font-size: 1rem;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--calcite-color-brand);
+}
+
+.header h1 {
+  color: var(--calcite-ui-text-1);
+  font-size: var(--calcite-font-size-1);
+  font-weight: var(--calcite-font-weight-medium);
+  margin: 0;
+}
+
+.intro-image {
   width: 300px;
-  padding: 1rem;
-  transition: transform 1s;
-  transform-origin: center;
-  backface-visibility: hidden;
+  margin: 0 auto;
+  display: block;
 }
 
-.visible {
-  transform: rotateY(0deg);
-}
+/* Upload area */
 
-.invisible {
-  transform: rotateY(180deg);
-}
-
-.container,
 #drop-zone {
   position: relative;
   display: flex;
   width: 100%;
-  min-height: 250px;
+  min-height: 100px;
 }
 
 #drop-zone div {
@@ -158,22 +123,14 @@ calcite-label[slot="footer-end"] {
   padding-top: 12px;
 }
 
-#drop-zone h1 {
-  position: absolute;
-  top: 20px;
-  color: var(--calcite-ui-text-1);
-  font-size: var(--calcite-font-size-1);
-  font-weight: var(--calcite-font-weight-medium);
-  margin: 0;
-  justify-self: first baseline;
-}
-
 input[type="file"] {
   display: none;
 }
 
 .custom-file-upload {
-  border: 1px solid #ccc;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   gap: 5px;
@@ -193,7 +150,16 @@ input[type="file"] {
   left: 0;
   right: 0;
   bottom: 0;
+  padding: 0;
   background-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Viewshed */
+
+.viewshed-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .preview {
@@ -201,10 +167,34 @@ input[type="file"] {
   pointer-events: none;
 }
 
-.hide {
+.step {
+  display: inline-block;
+  font-size: 1.1rem;
+  height: 30px;
+  width: 30px;
+  border-radius: var(--border-radius);
+  background-color: var(--calcite-ui-brand);
+  text-align: center;
+  margin-right: 5px;
+  color: white;
+}
+
+/* Scroll bar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
   display: none;
 }
 
-.display {
-  display: block;
+::-webkit-scrollbar-thumb {
+  background: rgba(50, 50, 50, 0.1);
+  border: none;
+  border-radius: var(--border-radius);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(50, 50, 50, 0.8);
 }

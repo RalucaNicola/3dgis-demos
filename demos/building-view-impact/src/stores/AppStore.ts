@@ -59,7 +59,7 @@ class AppStore extends Accessor {
   isStartupDialogShown = true;
 
   @property()
-  skipPreload = false;
+  skipPreload = true;
 
   @property()
   title: string;

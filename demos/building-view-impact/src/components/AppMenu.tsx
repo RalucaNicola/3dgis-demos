@@ -27,10 +27,7 @@ import ViewshedScreen from "./ViewshedScreen";
 const AppMenu = ({ store }: { store: AppStore }) => {
   return (
     <div class="card">
-      {" "}
-      {store.loading !== "done" ? (
-        <calcite-loader scale="l"></calcite-loader>
-      ) : (
+      {store.loading === "done" && (
         <div>
           <Intro store={store}></Intro>
           <UploadScreen store={store.uploadStore}></UploadScreen>
