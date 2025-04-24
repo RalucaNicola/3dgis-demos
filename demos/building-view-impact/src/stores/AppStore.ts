@@ -56,7 +56,7 @@ class AppStore extends Accessor {
   }
 
   @property()
-  isStartupDialogShown = true;
+  isStartupDialogShown = false;
 
   @property()
   skipPreload = true;
@@ -119,18 +119,6 @@ class AppStore extends Accessor {
     }
     this.deviceId = deviceId;
 
-    // this.addHandles([
-    //   watch(
-    //     () => this.uploadedFootprint,
-    //     () => this.updateFootprintFilter(),
-    //   ),
-    //   {
-    //     remove: () => {
-    //       window.onkeydown = null;
-    //     },
-    //   },
-    // ]);
-
     whenOnce(() => this.sceneStore.ready).then(async () => {
       await this.performAppLoad();
 
@@ -159,18 +147,6 @@ class AppStore extends Accessor {
     )!;
     field.defaultValue = this.deviceId;
 
-    // this.modifications = this.sceneStore.mesh.modifications;
-
-    // this._loading = "delete-models";
-    // const query = this.sceneStore.uploadLayer.createQuery();
-    // query.returnGeometry = false;
-    // const { features } = await this.sceneStore.uploadLayer.queryFeatures(query);
-    // if (features.length) {
-    //   await this.sceneStore.uploadLayer.applyEdits({
-    //     deleteFeatures: features,
-    //   });
-    // }
-
     if (!this.skipPreload) {
       this._loading = "preload-slides";
 
@@ -184,35 +160,6 @@ class AppStore extends Accessor {
 
     this._loading = "done";
   }
-
-  // private async updateFootprintFilter() {
-  //   const view = this.sceneStore.view;
-  //   if (!view) {
-  //     return;
-  //   }
-
-  //   const footprint = this.uploadedFootprint;
-  //   const layerView = await view.whenLayerView(this.sceneStore.downloadLayer);
-
-  //   if (footprint) {
-  //     const modifications = this.modifications
-  //       ? this.modifications.clone()
-  //       : new SceneModifications();
-
-  //     modifications.add(
-  //       new SceneModification({
-  //         geometry: footprint,
-  //         type: "replace",
-  //       }),
-  //     );
-
-  //     this.sceneStore.mesh.modifications = modifications;
-  //   } else {
-  //     this.sceneStore.mesh.modifications = this.modifications;
-  //     layerView.filter = null as any;
-  //   }
-  // }
-
 }
 
 export default AppStore;

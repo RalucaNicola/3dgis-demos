@@ -8,7 +8,7 @@ const ViewshedPreview = ({ store }: { store: ViewshedStore }) => {
       <calcite-panel heading="Proposed View">
         {store ? (
           <arcgis-scene
-            class={`preview`}
+            class="preview"
             map={store.view.map}
             onArcgisViewReadyChange={(e: ArcgisSceneCustomEvent<void>) => {
               store.updatePreview(e.target);
@@ -21,17 +21,10 @@ const ViewshedPreview = ({ store }: { store: ViewshedStore }) => {
       <calcite-panel heading="Existing View">
         {store ? (
           <arcgis-scene
-            class={`preview`}
-            map={store.view.map}
+            class="preview"
+            item-id="d4d4a2a8e4944946af59785938b17df9"
             onArcgisViewReadyChange={(e: ArcgisSceneCustomEvent<void>) => {
               store.updatePreview(e.target);
-              const view = e.target.view;
-              const sketchLayer = view.map.allLayers.find(
-                (l) => l.title === "Sketch Layer",
-              ) as __esri.GraphicsLayer;
-              view.whenLayerView(sketchLayer).then((lyrView) => {
-                lyrView.visible = false;
-              });
             }}
           ></arcgis-scene>
         ) : (

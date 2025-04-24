@@ -1,9 +1,11 @@
 import Accessor from "@arcgis/core/core/Accessor";
 import { property, subclass } from "@arcgis/core/core/accessorSupport/decorators";
+import Polygon from "@arcgis/core/geometry/Polygon";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
+import SceneFilter from "@arcgis/core/layers/support/SceneFilter";
 import SketchViewModel from "@arcgis/core/widgets/Sketch/SketchViewModel";
 import { ScreenType } from "../interfaces";
-import { findLayerByTitle } from "../utils";
+import { findLayerById, findLayerByTitle } from "../utils";
 
 type UploadStoreProperties = Pick<UploadStore, "view" | "deviceId">;
 const MAX_FILESIZE_MB = 50;
@@ -17,6 +19,9 @@ class UploadStore extends Accessor {
 
     @property()
     sceneLayer: __esri.SceneLayer;
+
+    @property()
+    buildingsLayer: __esri.SceneLayer;
 
     @property()
     deviceId: string;
@@ -38,11 +43,23 @@ class UploadStore extends Accessor {
         title: "Sketch Layer"
     });
 
+    @property()
+    sketchAreas: __esri.Collection<Polygon>;
+
+    updateSketchAreas() {
+        this.sketchAreas = this.sketchLayer.graphics.map((graphic) => Polygon.fromExtent(graphic.geometry?.extent as __esri.Extent) as __esri.Polygon);
+        this.buildingsLayer.filter = new SceneFilter({
+            geometries: this.sketchAreas,
+            spatialRelationship: "disjoint"
+        })
+    }
+
     constructor(props: UploadStoreProperties) {
         super(props);
         const view = props.view;
         this.deviceId = props.deviceId;
         this.sceneLayer = findLayerByTitle(view.map, "Building Upload") as __esri.SceneLayer;
+        this.buildingsLayer = findLayerById(view.map, "18c679fde82-layer-38") as __esri.SceneLayer;
         view.map.layers.add(this.sketchLayer);
         this.sketchVM = new SketchViewModel({
             layer: this.sketchLayer,
@@ -52,7 +69,7 @@ class UploadStore extends Accessor {
         this.sketchVM.on("update", async (event) => {
             console.log("update", event);
             if (this.isUpdating) return this.sketchVM.cancel();
-
+            this.updateSketchAreas();
         });
 
         this.sketchVM.on("create", async (event) => {
