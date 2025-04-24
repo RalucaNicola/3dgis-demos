@@ -19,9 +19,9 @@
   --calcite-navigation-background-color: transparent;
   --background-color: rgba(255, 255, 255, 0.5);
   --border-radius: 10px;
-  --calcite-color-brand: rgb(232, 179, 100) !important;
-  --calcite-color-brand-hover: rgb(237, 164, 55) !important;
-  --calcite-color-brand-press: rgb(237, 164, 55) !important;
+  // --calcite-color-brand: rgb(232, 179, 100) !important;
+  // --calcite-color-brand-hover: rgb(237, 164, 55) !important;
+  // --calcite-color-brand-press: rgb(237, 164, 55) !important;
 }
 
 arcgis-scene {
@@ -50,60 +50,18 @@ calcite-label[slot="footer-end"] {
   }
 }
 
-/* User log in */
-
-.user-menu {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1;
-  background: var(--background-color);
-  backdrop-filter: blur(10px);
-  border-radius: var(--border-radius);
-  padding: 10px 0;
-}
-
-/* Side menu */
-
-.card {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  bottom: 30px;
-  z-index: 1;
-  background: var(--background-color);
-  backdrop-filter: blur(10px);
-  border-radius: var(--border-radius);
-  width: 400px;
-  padding: 1.5rem;
-  overflow: auto;
-}
-
-.card p {
-  font-size: 1rem;
-}
-
-/* Header */
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--calcite-color-brand);
-}
-
-.header h1 {
-  color: var(--calcite-ui-text-1);
-  font-size: var(--calcite-font-size-1);
-  font-weight: var(--calcite-font-weight-medium);
-  margin: 0;
-}
-
 .intro-image {
-  width: 300px;
+  width: 250px;
   margin: 0 auto;
   display: block;
 }
 
+.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
 /* Upload area */
 
 #drop-zone {
@@ -129,7 +87,6 @@ input[type="file"] {
 
 .custom-file-upload {
   border: none;
-  border-radius: 20px;
   font-size: 1rem;
   display: flex;
   align-items: center;
@@ -163,8 +120,8 @@ input[type="file"] {
 }
 
 .preview {
-  height: 200px;
-  pointer-events: none;
+  width: 100%;
+  height: 100%;
 }
 
 .step {

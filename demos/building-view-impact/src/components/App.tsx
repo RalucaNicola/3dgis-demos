@@ -35,6 +35,7 @@ import "@arcgis/map-components/dist/components/arcgis-zoom";
 import AppMenu from "./AppMenu";
 import StartupDialog from "./StartupDialog";
 import User from "./User";
+import ViewshedPreview from "./ViewshedPreview";
 
 type AppProperties = Pick<App, "store">;
 
@@ -56,12 +57,12 @@ class App extends Widget<AppProperties> {
           <StartupDialog store={this.store}></StartupDialog>
           <User store={this.store}></User>
           <AppMenu store={this.store}></AppMenu>
+          <ViewshedPreview store={this.store.viewshedStore}></ViewshedPreview>
           <arcgis-scene
             item-id={this.store.webSceneId}
             onArcgisViewReadyChange={(e: ArcgisSceneCustomEvent<void>) =>
               this.bindView(e.target)
             }
-            padding={{ top: 70 }}
           ></arcgis-scene>
         </calcite-shell>
       </div>

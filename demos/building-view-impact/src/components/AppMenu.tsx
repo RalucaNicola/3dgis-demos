@@ -18,6 +18,8 @@ import { tsx } from "@arcgis/core/widgets/support/widget";
 import "@esri/calcite-components/dist/components/calcite-card";
 import "@esri/calcite-components/dist/components/calcite-icon";
 import "@esri/calcite-components/dist/components/calcite-loader";
+import "@esri/calcite-components/dist/components/calcite-panel";
+import "@esri/calcite-components/dist/components/calcite-shell-panel";
 
 import AppStore from "../stores/AppStore";
 import Intro from "./Intro";
@@ -26,15 +28,21 @@ import ViewshedScreen from "./ViewshedScreen";
 
 const AppMenu = ({ store }: { store: AppStore }) => {
   return (
-    <div class="card">
-      {store.loading === "done" && (
-        <div>
-          <Intro store={store}></Intro>
+    <calcite-shell-panel slot="panel-start" position="start">
+      <div class="container">
+        <Intro></Intro>
+        {store.uploadStore ? (
           <UploadScreen store={store.uploadStore}></UploadScreen>
+        ) : (
+          <div></div>
+        )}
+        {store.viewshedStore ? (
           <ViewshedScreen store={store.viewshedStore}></ViewshedScreen>
-        </div>
-      )}
-    </div>
+        ) : (
+          <div></div>
+        )}
+      </div>
+    </calcite-shell-panel>
   );
 };
 

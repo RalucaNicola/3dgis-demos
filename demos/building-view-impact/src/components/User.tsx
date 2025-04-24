@@ -31,7 +31,27 @@ const User = ({ store }: { store: AppStore }) => {
   const user = (userStore.authenticated && userStore.user) || null;
 
   return (
-    <div class="user-menu">
+    <calcite-navigation slot="header">
+      <calcite-navigation-logo
+        slot="logo"
+        heading={store.title}
+        description="ArcGIS Maps SDK for JavaScript"
+        thumbnail="./icon-64.svg"
+        onclick={() => {
+          const itemPageUrl = store.sceneStore.map.portalItem?.itemPageUrl;
+          if (itemPageUrl) {
+            window.open(itemPageUrl, "new");
+          }
+        }}
+      ></calcite-navigation-logo>
+
+      <calcite-button
+        appearance="transparent"
+        kind="neutral"
+        icon-start="information"
+        slot="content-start"
+        onclick={() => (store.isStartupDialogShown = true)}
+      ></calcite-button>
       {user ? (
         <calcite-navigation-user
           slot="user"
@@ -50,7 +70,7 @@ const User = ({ store }: { store: AppStore }) => {
           ></calcite-menu-item>
         </calcite-menu>
       )}
-    </div>
+    </calcite-navigation>
   );
 };
 
