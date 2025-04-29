@@ -4,7 +4,12 @@ import ViewshedStore from "../stores/ViewshedStore";
 
 const ViewshedPreview = ({ store }: { store: ViewshedStore }) => {
   return (
-    <calcite-shell-panel slot="panel-end" position="end" width-scale="l">
+    <calcite-shell-panel
+      slot="panel-end"
+      position="end"
+      width-scale="l"
+      class="viewshed-panel-border"
+    >
       <calcite-panel heading="Proposed View">
         {store ? (
           <arcgis-scene
