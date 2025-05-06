@@ -1,5 +1,6 @@
 import { tsx } from "@arcgis/core/widgets/support/widget";
 import { ArcgisSceneCustomEvent } from "@arcgis/map-components";
+import { webSceneId } from "../main";
 import ViewshedStore from "../stores/ViewshedStore";
 
 const ViewshedPreview = ({ store }: { store: ViewshedStore }) => {
@@ -27,7 +28,7 @@ const ViewshedPreview = ({ store }: { store: ViewshedStore }) => {
         {store ? (
           <arcgis-scene
             class="preview"
-            item-id="d4d4a2a8e4944946af59785938b17df9"
+            item-id={webSceneId}
             onArcgisViewReadyChange={(e: ArcgisSceneCustomEvent<void>) => {
               store.updatePreview(e.target);
             }}
