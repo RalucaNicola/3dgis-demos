@@ -141,11 +141,11 @@ class AppStore extends Accessor {
 
     await map.loadAll();
 
-    this.sceneStore.uploadLayer.definitionExpression = `deviceid = '${this.deviceId}'`;
-    const field = this.sceneStore.uploadLayer.fields.find(
-      (f) => f.name === "deviceid",
-    )!;
-    field.defaultValue = this.deviceId;
+    // this.sceneStore.uploadLayer.definitionExpression = `deviceid = '${this.deviceId}'`;
+    // const field = this.sceneStore.uploadLayer.fields.find(
+    //   (f) => f.name === "deviceid",
+    // )!;
+    // field.defaultValue = this.deviceId;
 
     if (!this.skipPreload) {
       this._loading = "preload-slides";

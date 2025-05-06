@@ -24,7 +24,6 @@ import SceneLayer from "@arcgis/core/layers/SceneLayer";
 import SceneLayerView from "@arcgis/core/views/layers/SceneLayerView";
 import SceneView from "@arcgis/core/views/SceneView";
 import WebScene from "@arcgis/core/WebScene";
-import { findLayerByTitle } from "../utils";
 
 @subclass()
 class SceneStore extends Accessor {
@@ -88,7 +87,7 @@ class SceneStore extends Accessor {
     const map = view.map;
 
     // this.downloadLayer = findLayerById(map, "190697a6c61-layer-314");
-    this.uploadLayer = findLayerByTitle(map, "Building Upload");
+    // this.uploadLayer = findLayerByTitle(map, "Building Upload");
     // this.lowPolyTrees = findLayerById(map, "19058d7d9f2-layer-87");
     // this.realisticTrees = findLayerById(map, "19058d7d2b5-layer-86");
     // this.mesh = findLayerById(map, "1904131bf90-layer-113");

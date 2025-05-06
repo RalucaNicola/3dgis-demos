@@ -2,10 +2,11 @@ import Accessor from "@arcgis/core/core/Accessor";
 import { property, subclass } from "@arcgis/core/core/accessorSupport/decorators";
 import Polygon from "@arcgis/core/geometry/Polygon";
 import GraphicsLayer from "@arcgis/core/layers/GraphicsLayer";
+import SceneLayer from "@arcgis/core/layers/SceneLayer";
 import SceneFilter from "@arcgis/core/layers/support/SceneFilter";
 import SketchViewModel from "@arcgis/core/widgets/Sketch/SketchViewModel";
 import { ScreenType } from "../interfaces";
-import { findLayerById, findLayerByTitle } from "../utils";
+import { findLayerByTitle } from "../utils";
 
 type UploadStoreProperties = Pick<UploadStore, "view" | "deviceId">;
 const MAX_FILESIZE_MB = 50;
@@ -58,8 +59,10 @@ class UploadStore extends Accessor {
         super(props);
         const view = props.view;
         this.deviceId = props.deviceId;
-        this.sceneLayer = findLayerByTitle(view.map, "Building Upload") as __esri.SceneLayer;
-        this.buildingsLayer = findLayerById(view.map, "18c679fde82-layer-38") as __esri.SceneLayer;
+        this.sceneLayer = new SceneLayer({
+            url: "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/EditableFeatures3DObject2/SceneServer"
+        });
+        this.buildingsLayer = findLayerByTitle(view.map, "Filter Buildings") as __esri.SceneLayer;
         view.map.layers.add(this.sketchLayer);
         this.sketchVM = new SketchViewModel({
             layer: this.sketchLayer,
