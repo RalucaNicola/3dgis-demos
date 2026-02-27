@@ -1,5 +1,9 @@
 import { tsx } from "@arcgis/core/widgets/support/widget";
+import "@esri/calcite-components/dist/components/calcite-action";
+import "@esri/calcite-components/dist/components/calcite-list";
+import "@esri/calcite-components/dist/components/calcite-list-item";
 import ViewshedStore from "../stores/ViewshedStore";
+
 
 const ViewshedScreen = ({ store }: { store: ViewshedStore }) => {
   return (
@@ -29,6 +33,28 @@ const ViewshedScreen = ({ store }: { store: ViewshedStore }) => {
           </calcite-button>
         )}
       </div>
+      {store.viewsheds.length > 0 ? (
+        <calcite-list selection-mode="single">
+          {store.viewsheds.map((viewshed, index) => (
+            <calcite-list-item
+              key={`viewshed-${index}`}
+              label={`Viewshed #${index + 1}`}
+              selected={store.analysisView?.selectedViewshed === viewshed}
+              onCalciteListItemSelect={() => store.selectViewshed(viewshed)}
+            >
+              <calcite-action
+                slot="actions-end"
+                icon="trash"
+                text="Delete"
+                onclick={(e: Event) => {
+                  e.stopPropagation();
+                  store.deleteViewshed(viewshed);
+                }}
+              ></calcite-action>
+            </calcite-list-item>
+          ))}
+        </calcite-list>
+      ) : null}
     </div>
   );
 };

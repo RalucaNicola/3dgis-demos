@@ -1,3 +1,4 @@
+import Viewshed from "@arcgis/core/analysis/Viewshed";
 import ViewshedAnalysis from "@arcgis/core/analysis/ViewshedAnalysis";
 import Accessor from "@arcgis/core/core/Accessor";
 import { property, subclass } from "@arcgis/core/core/accessorSupport/decorators";
@@ -25,6 +26,9 @@ class ViewshedStore extends Accessor {
     displayPreviewContainer: boolean = false;
 
     @property()
+    viewsheds: Viewshed[] = [];
+
+    @property()
     get state() {
         return this.abortController ? "creating" : "idle";
     }
@@ -43,7 +47,12 @@ class ViewshedStore extends Accessor {
 
         reactiveUtils.watch(() => this.analysisView?.selectedViewshed, (selectedViewshed) => {
             this.displayPreviewContainer = selectedViewshed ? true : false;
-        })
+        });
+
+        reactiveUtils.watch(() => this.viewshedAnalysis.viewsheds.length, () => {
+            console.log("viewshed changed");
+            this.viewsheds = [...this.viewshedAnalysis.viewsheds.toArray()];
+        });
     }
 
     create() {
@@ -72,6 +81,17 @@ class ViewshedStore extends Accessor {
     stopCreating() {
         this.abortController?.abort();
         this.abortController = null;
+    }
+
+    selectViewshed(viewshed: Viewshed) {
+        this.analysisView.selectedViewshed = viewshed;
+    }
+
+    deleteViewshed(viewshed: Viewshed) {
+        this.viewshedAnalysis.viewsheds.remove(viewshed);
+        if (this.analysisView.selectedViewshed === viewshed) {
+            this.analysisView.selectedViewshed = null;
+        }
     }
 
     updatePreview(previewElement: HTMLArcgisSceneElement) {

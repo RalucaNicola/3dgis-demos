@@ -44,6 +44,7 @@ calcite-label[slot="footer-end"] {
 
 .startup-dialog-content {
   max-height: 60vh;
+
   img,
   video {
     max-width: 100%;
@@ -65,7 +66,10 @@ calcite-label[slot="footer-end"] {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+
 /* Upload area */
 
 #drop-zone {
