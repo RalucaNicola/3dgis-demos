@@ -22,7 +22,7 @@ class UploadStore extends Accessor {
     sceneLayer: __esri.SceneLayer;
 
     @property()
-    buildingsLayer: __esri.SceneLayer;
+    buildingsLayer: __esri.SceneLayer | __esri.GroupLayer;
 
     @property()
     deviceId: string;
@@ -49,10 +49,22 @@ class UploadStore extends Accessor {
 
     updateSketchAreas() {
         this.sketchAreas = this.sketchLayer.graphics.map((graphic) => Polygon.fromExtent(graphic.geometry?.extent as __esri.Extent) as __esri.Polygon);
-        this.buildingsLayer.filter = new SceneFilter({
-            geometries: this.sketchAreas,
-            spatialRelationship: "disjoint"
-        })
+        if (this.buildingsLayer.type === "group") {
+            this.buildingsLayer.allLayers.forEach((layer) => {
+                if (layer.type === "scene") {
+                    (layer as __esri.SceneLayer).filter = new SceneFilter({
+                        geometries: this.sketchAreas,
+                        spatialRelationship: "disjoint"
+                    });
+                }
+            });
+        }
+        if (this.buildingsLayer.type === "scene") {
+            this.buildingsLayer.filter = new SceneFilter({
+                geometries: this.sketchAreas,
+                spatialRelationship: "disjoint"
+            });
+        }
     }
 
     constructor(props: UploadStoreProperties) {
@@ -62,8 +74,10 @@ class UploadStore extends Accessor {
         this.sceneLayer = new SceneLayer({
             url: "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/EditableFeatures3DObject2/SceneServer"
         });
-        this.buildingsLayer = findLayerByTitle(view.map, "Filter Buildings") as __esri.SceneLayer;
-        view.map.layers.add(this.sketchLayer);
+        if (view.map) {
+            this.buildingsLayer = findLayerByTitle(view.map, "Buildings");
+            view.map.layers.add(this.sketchLayer);
+        }
         this.sketchVM = new SketchViewModel({
             layer: this.sketchLayer,
             view
